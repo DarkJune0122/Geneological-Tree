@@ -70,7 +70,7 @@ namespace Gen.Networking
         /// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ]]>
         public static IDatabaseProcessor GetCurrent()
         {
-            return UseDebugServer ? new Data.DebugDB() : new Data.MongoDB();
+            return PlayerPrefs.GetInt("use-debug-server") != 0 ? new Data.DebugDB() : new Data.MongoDB();
         }
     }
 }
