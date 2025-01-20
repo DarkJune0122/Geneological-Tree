@@ -92,6 +92,10 @@ namespace Gen
                 return;
             }
 
+            Debug.Log("Username: " + info.Username);
+            Debug.Log("Login: " + info.Password);
+            Debug.Log("User ID: " + info.UserID);
+
             OnLoggingIn?.Invoke();
             SetStatus("Signing up...");
             DB.Register(info).WhenCompleted(result =>
@@ -105,6 +109,9 @@ namespace Gen
 
                 if (result.result)
                 {
+                    Debug.Log("Username: " + info.Username);
+                    Debug.Log("Login: " + info.Password);
+                    Debug.Log("User ID: " + info.UserID);
                     OnSigningUpSucceeded();
                 }
                 else if (result.status == 400)
@@ -153,7 +160,12 @@ namespace Gen
         ///                                     Miscellaneous
         /// 
         /// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- ]]>
-        private void SetStatus(string status) => OnStatusUpdated?.Invoke(LastMessage = status);
+        private void SetStatus(string status)
+        {
+            Debug.Log(status);
+            OnStatusUpdated?.Invoke(LastMessage = status);
+        }
+
         private void ResetOnEdit(string text)
         {
             if (isLoggingIn) return;

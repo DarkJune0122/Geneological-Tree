@@ -16,7 +16,7 @@ namespace Gen.Data
         public async Task<CommunicationResult<bool>> Register(LoginInfo info)
         {
             // Requesting:
-            string payload = JsonUtility.ToJson(new LoginData(info.Username, info.Password));
+            string payload = JsonUtility.ToJson(new LoginData(info.Username, info.Encrypt(info.Password)));
             using UnityWebRequest request = UnityWebRequest.Post(
                 IDatabaseProcessor.ServerURI + "register",
                 payload,
@@ -36,7 +36,7 @@ namespace Gen.Data
         public async Task<CommunicationResult<(bool, string)>> Login(LoginInfo info)
         {
             // Requesting:
-            string payload = JsonUtility.ToJson(new LoginData(info.Username, info.Password));
+            string payload = JsonUtility.ToJson(new LoginData(info.Username, info.Encrypt(info.Password)));
             using UnityWebRequest request = UnityWebRequest.Post(
                 IDatabaseProcessor.ServerURI + "login",
                 payload,
